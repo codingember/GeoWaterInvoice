@@ -1,0 +1,18 @@
+{
+	"type": "FeatureCollection",
+	"features": [
+		{
+			"type": "Feature",
+			"properties": { 
+				"Parcel_ID": "12345", 
+				"Owner": "John Doe", 
+				"Water_Usage": "1500 gallons" 
+			},
+			
+			"geometry": {
+				"type": "Polygon",
+				"coordinates": [[[ -122.4194, 37.7749 ], [ -122.4184, 37.7759 ], [ -122.4174, 37.7745 ], [ -122.4194, 37.7749 ]]]
+			}
+		}
+	]
+}

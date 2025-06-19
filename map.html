@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    
+    <title>Geo Water Map</title>
+
+    <!-- Leaflet & Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <!-- Explicitly Defined SVG for CairoSVG -->
+    <svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+        <rect width="800" height="600" style="fill:lightblue;stroke:black;stroke-width:2"/>
+        <text x="50" y="50" font-size="24" fill="black">Water Distribution Map</text>
+    </svg>
+
+    <script>
+        // Initialize Map
+        var map = L.map("map", { center: [37.7749, -122.4194], zoom: 10 });
+
+        // Tile Layer
+        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: "&copy; OpenStreetMap contributors",
+            maxZoom: 19,
+        }).addTo(map);
+
+        // Load Parcels GeoJSON
+        $.getJSON("parcels.geojson", function(data) {
+            L.geoJson(data, {
+                style: { color: "blue", weight: 2 },
+                onEachFeature: function(feature, layer) {
+                    layer.bindPopup(`<b>Owner:</b> ${feature.properties.Owner}<br><b>Water Usage:</b> ${feature.properties.Water_Usage}`);
+                }
+            }).addTo(map);
+        });
+
+        // Load Pipelines GeoJSON
+        $.getJSON("pipelines.geojson", function(data) {
+            L.geoJson(data, {
+                style: { color: "green", weight: 3, dashArray: "5,5" },
+                onEachFeature: function(feature, layer) {
+                    layer.bindPopup(`<b>Pipeline ID:</b> ${feature.properties.Pipeline_ID}<br><b>Capacity:</b> ${feature.properties.Capacity}`);
+                }
+            }).addTo(map);
+        });
+    </script>
+</body>
+</html>

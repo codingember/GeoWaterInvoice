@@ -1,0 +1,21 @@
+{
+	"type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": { "Pipeline_ID": "PL-001", "Capacity": "5000 gallons/hour" },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [[-122.4194, 37.7749], [-122.4184, 37.7759], [-122.4174, 37.7745]]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": { "Pipeline_ID": "PL-002", "Capacity": "8000 gallons/hour" },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [[-122.425, 37.780], [-122.424, 37.781], [-122.423, 37.779]]
+            }
+        }
+    ]
+}
